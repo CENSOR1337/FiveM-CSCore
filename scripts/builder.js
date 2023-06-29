@@ -1,16 +1,5 @@
 const esbuild = require('esbuild');
-
 const production = process.argv.findIndex(argItem => argItem === '--mode=production') >= 0;
-
-const onRebuild = (context) => {
-    return async (err, res) => {
-        if (err) {
-            return console.error(`[${context}]: Rebuild failed`, err);
-        }
-
-        console.log(`[${context}]: Rebuild succeeded, warnings:`, res.warnings);
-    }
-}
 
 const server = {
     platform: 'node',
