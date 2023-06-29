@@ -1,4 +1,4 @@
-import { Vector3 } from "../../shared/utils/Vector3";
+import { Vector3 } from "@cscore-shared/utils/Vector3";
 
 export class WordObject {
 	public pos: Vector3;

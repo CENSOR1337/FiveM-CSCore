@@ -1,7 +1,8 @@
 import * as crypto from "crypto";
-import { Vector3 } from "@cscore-shared/utils/Vector3";
 import { WordObject } from "./WordObject";
-import { SYSTEM_EVENTS } from "../../shared/enums/system";
+import { Vector3 } from "@cscore-shared/utils/Vector3";
+import { SYSTEM_EVENTS } from "@cscore-shared/enums/system";
+import { Dispatcher } from "@cscore-shared/utils/Dispatcher";
 
 function GetPlayers() {
 	const players = new Array<number>();
@@ -16,27 +17,6 @@ function GetPlayers() {
 interface listenerType {
 	id: number;
 	type: "enter" | "exit";
-}
-
-class Dispatcher {
-	private listenerId = 0;
-	private listeners: Map<number, (...args: any[]) => void> = new Map();
-
-	public add(listener: (...args: any[]) => void) {
-		this.listenerId++;
-		this.listeners.set(this.listenerId, listener);
-		return this.listenerId;
-	}
-
-	public remove(id: number) {
-		this.listeners.delete(id);
-	}
-
-	public broadcast(...args: any[]) {
-		this.listeners.forEach((listener) => {
-			listener(...args);
-		});
-	}
 }
 
 export class Collision extends WordObject {

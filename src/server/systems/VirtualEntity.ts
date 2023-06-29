@@ -1,6 +1,6 @@
 import * as crypto from "crypto";
 import * as cfx from "@nativewrappers/fivem-server";
-import { Vector3 } from "../../shared/utils/Vector3";
+import { Vector3 } from "@cscore-shared/utils/Vector3";
 import { WordObject } from "./WordObject";
 
 export class VirtualEntity extends WordObject {
