@@ -20,6 +20,7 @@ export class Colshape extends WordObject {
 	private interval: NodeJS.Timer;
 	private insideEntities: Set<number> = new Set();
 	private destroyed: boolean = false;
+    
 	constructor(pos: Vector3, radius: number) {
 		super(pos);
 		this.radius = radius;
@@ -78,7 +79,8 @@ export class Colshape extends WordObject {
 		for (const handle of this.insideEntities) {
 			const isExist = DoesEntityExist(handle);
 			const isInside = this.isEntityInside(handle);
-			if (!isExist || !isInside) {
+            const isSameDimension = GetEntityRoutingBucket(handle) === this.dimension;
+			if (!isExist || !isInside || !isSameDimension) {
 				this.insideEntities.delete(handle);
 				emit(SYSTEM_EVENTS.onLeaveColshape, this.id, handle);
 			}
@@ -87,7 +89,8 @@ export class Colshape extends WordObject {
 		for (const handle of entities) {
 			if (this.insideEntities.has(handle)) continue;
 			const isInside = this.isEntityInside(handle);
-			if (isInside) {
+            const isSameDimension = GetEntityRoutingBucket(handle) === this.dimension;
+			if (isInside && isSameDimension) {
 				if (!this.insideEntities.has(handle)) {
 					this.insideEntities.add(handle);
 					emit(SYSTEM_EVENTS.onEnterColshape, this.id, handle);
