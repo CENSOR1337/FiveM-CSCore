@@ -27,11 +27,13 @@ const client = {
 for (const context of [ 'client', 'server' ]) {
   esbuild.build({
     bundle: true,
+    minify: production,
     entryPoints: [`src/${context}/${context}.ts`],
     outfile: `dist/${context}.js`,
     watch: production ? false : {
       onRebuild: onRebuild(context),
     },
+    tsconfig: `src/${context}/tsconfig.json`,
     ...(context === 'client' ? client : server),
   }).then(() => console.log(`[${context}]: Built successfully!`)).catch(() => process.exit(1));
 }

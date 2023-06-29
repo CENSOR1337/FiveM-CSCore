@@ -1,10 +1,11 @@
 import * as crypto from "crypto";
 import * as cfx from "@nativewrappers/fivem-server";
+import { Vector3 } from "../../shared/utils/Vector3";
 import { WordObject } from "./WordObject";
 
 export class VirtualEntity extends WordObject {
 	readonly id = crypto.randomUUID();
-	constructor(position: cfx.Vector3, streamingDistance: number, data?: Record<string, any>) {
+	constructor(position: Vector3, streamingDistance: number, data?: Record<string, any>) {
 		super(position);
 
 		const players = cfx.Player.AllPlayers();

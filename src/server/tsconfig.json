@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "baseUrl": ".",
+    "paths": {
+        "@cscore-shared/*": ["../shared/*"],
+    },
     "noImplicitAny": true,
     "module": "commonjs",
     "target": "es2021",

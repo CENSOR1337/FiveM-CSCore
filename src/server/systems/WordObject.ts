@@ -1,10 +1,10 @@
-import * as cfx from "@nativewrappers/fivem-server";
+import { Vector3 } from "../../shared/utils/Vector3";
 
 export class WordObject {
-	public pos: cfx.Vector3;
+	public pos: Vector3;
 	public dimension: number;
 
-	constructor(pos: cfx.Vector3, dimension?: number) {
+	constructor(pos: Vector3, dimension?: number) {
 		this.pos = pos;
 		this.dimension = dimension || 0;
 	}

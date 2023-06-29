@@ -1,5 +1,5 @@
 import * as crypto from "crypto";
-import * as cfx from "@nativewrappers/fivem-server";
+import { Vector3 } from "@cscore-shared/utils/Vector3";
 import { WordObject } from "./WordObject";
 import { SYSTEM_EVENTS } from "../../shared/enums/system";
 
@@ -20,18 +20,18 @@ export class Colshape extends WordObject {
 	private interval: NodeJS.Timer;
 	private insideEntities: Set<number> = new Set();
 	private destroyed: boolean = false;
-	constructor(pos: cfx.Vector3, radius: number) {
+	constructor(pos: Vector3, radius: number) {
 		super(pos);
 		this.radius = radius;
 		this.interval = setInterval(this.onTick.bind(this), 1000);
 	}
 
-	private isPosInside(pos: cfx.Vector3) {
+	private isPosInside(pos: Vector3) {
 		return this.pos.distance(pos) <= this.radius;
 	}
 
-	private isEntityInside(entity: cfx.Entity | number) {
-		const position = entity instanceof cfx.Entity ? entity.Position : cfx.Vector3.fromArray(GetEntityCoords(entity));
+	private isEntityInside(entity: number) {
+		const position = Vector3.fromArray(GetEntityCoords(entity));
 		return this.isPosInside(position);
 	}
 
@@ -43,8 +43,7 @@ export class Colshape extends WordObject {
 		if (this.destroyed) {
 			clearInterval(this.interval);
 			for (const handle of this.insideEntities) {
-				const entity = new cfx.Entity(handle);
-				emit(SYSTEM_EVENTS.onLeaveColshape, entity, this);
+				emit(SYSTEM_EVENTS.onLeaveColshape, handle, this);
 			}
 			this.insideEntities.clear();
 			return;
