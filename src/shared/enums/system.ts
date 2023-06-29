@@ -5,6 +5,6 @@ function appendNamespace(name: string): string {
 }
 
 export const SYSTEM_EVENTS = {
-	onEnterColshape: appendNamespace("colshape:enter"),
-	onLeaveColshape: appendNamespace("colshape:leave"),
+	onEnterColshape: appendNamespace("entityEnterColshape"),
+	onLeaveColshape: appendNamespace("entityLeaveColshape"),
 };
