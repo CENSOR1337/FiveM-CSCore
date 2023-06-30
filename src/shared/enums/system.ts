@@ -7,4 +7,7 @@ function appendNamespace(name: string): string {
 export const SYSTEM_EVENTS = {
 	onEnterColshape: appendNamespace("entityEnterColshape"),
 	onLeaveColshape: appendNamespace("entityLeaveColshape"),
+	onVirtualEntityStreamIn: appendNamespace("onVirtualEntityStreamIn"),
+	onVirtualEntityStreamOut: appendNamespace("onVirtualEntityStreamOut"),
+    onVirtualEntitySyncedMetaChange: appendNamespace("onVirtualEntitySyncedMetaChange"),
 };
